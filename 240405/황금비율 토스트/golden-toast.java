@@ -47,8 +47,9 @@ public class Main {
                 }
             }
         }
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i));
+        iter = list.listIterator();
+        while(iter.hasNext()){
+            sb.append(iter.next());
         }
         System.out.println(sb);
     }
