@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-
+        StringBuilder sb = new StringBuilder();
         int n,m; //식빵의 개수, 레시피 암호문의 개수
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
@@ -46,10 +46,10 @@ public class Main {
                     iter.remove();
                 }
             }
-//            System.out.println(list.toString());
         }
         for (int i = 0; i < list.size(); i++) {
-            System.out.printf(String.valueOf(list.get(i)));
+            sb.append(list.get(i));
         }
+        System.out.println(sb);
     }
 }
