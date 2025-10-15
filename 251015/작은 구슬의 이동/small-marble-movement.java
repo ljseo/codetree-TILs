@@ -5,8 +5,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
         int T = sc.nextInt();
-        int R = sc.nextInt();
-        int C = sc.nextInt();
+        int R = sc.nextInt()-1;
+        int C = sc.nextInt()-1;
         String D = sc.next();
         // Please write your code here.
 
@@ -24,12 +24,13 @@ public class Main {
                 nd = 3 - nd;
             }
         }
+        R++; C++;
         System.out.print(R +" " + C);
     }
     static int getDir(String D){
-        if(D == "U") return 0;
-        else if(D == "R") return 1;
-        else if(D == "L") return 2;
+        if(D.equals("D")) return 0;
+        else if(D.equals("R")) return 1;
+        else if(D.equals("L")) return 2;
         else return 3;
     }
     static boolean inRange(int x, int y, int n){
