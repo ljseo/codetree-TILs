@@ -28,7 +28,7 @@ public class Main {
         System.out.print(R +" " + C);
     }
     static int getDir(String D){
-        if(D.equals("D")) return 0;
+        if(D.equals("U")) return 0;
         else if(D.equals("R")) return 1;
         else if(D.equals("L")) return 2;
         else return 3;
