@@ -33,6 +33,6 @@ public class Main {
         else return 3;
     }
     static boolean inRange(int x, int y, int n){
-        return 0 <= x && x < n && 0 <= y &&& y < n; 
+        return 0 <= x && x < n && 0 <= y && y < n; 
     }
 }
