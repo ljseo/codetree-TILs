@@ -68,8 +68,9 @@ public class Main {
         // 범위를 벗어나거나 경계가 아니면 방향 전환
         if(!inRange(nx, ny) || !isBoundary(nx, ny)){
             dir = (dir + 1) % 4;
+            nx = x;
+            ny = y;
         }
-        
         x = nx;
         y = ny;
     }
