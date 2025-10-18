@@ -19,6 +19,8 @@ public class Main {
         int[] startPos = getStartPos(startNum);
         int x = startPos[0];
         int y = startPos[1];
+        // System.out.println(dir);
+        // System.out.println(x +" "+ y);
         int cnt = 0;
         while(inRange(x,y)){
             if(grid[x][y] == '/'){
@@ -55,16 +57,16 @@ public class Main {
         int [] dy = new int[]{1,0,-1,0};
         int x = 0;
         int y = 0;
-        int cnt = 1;
         int dir = 0;
-        for(int i = 1; i<=4*n;i++){
+        for(int i = 2; i<=4*n;i++){
             if(i % n == 0) {
                 dir = (dir+1) % 4;
             }
-            x += dx[dir];
-            y += dy[dir];
-            cnt++;
-            if(cnt == startNum) return new int[]{x,y};
+            else{
+                x += dx[dir];
+                y += dy[dir];
+            }
+            if(i == startNum) return new int[]{x,y};
         }
         return new int[]{0,0};
     }
