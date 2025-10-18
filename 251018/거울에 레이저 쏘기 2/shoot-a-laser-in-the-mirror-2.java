@@ -66,7 +66,7 @@ public class Main {
         int ny = y + dy[dir];
         
         // 범위를 벗어나거나 경계가 아니면 방향 전환
-        if(!inRange(nx, ny) ){
+        if(!inRange(nx, ny) || !isBoundary(nx, ny)){
             dir = (dir + 1) % 4;
             nx = x + dx[dir];
             ny = y + dy[dir];
@@ -79,9 +79,9 @@ public class Main {
     return new int[]{x, y};
 }
 
-// static boolean isBoundary(int x, int y){
-//     return x == 0 || x == n-1 || y == 0 || y == n-1;
-// }
+static boolean isBoundary(int x, int y){
+    return x == 0 || x == n-1 || y == 0 || y == n-1;
+}
     // static int[] getStartPos(int startNum){
     // int idx = startNum - 1;
     
