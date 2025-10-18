@@ -53,25 +53,55 @@ public class Main {
         return (startNum-1) / n;
     }
     static int[] getStartPos(int startNum){
-    int idx = startNum - 1;
+    if(startNum == 1) return new int[]{0, 0};
     
-    if(idx < n) {
-        // 위쪽 가장자리: (0, idx)
-        return new int[]{0, idx};
+    int x = 0, y = 0;
+    int dir = 0;  // 0:오른쪽, 1:아래, 2:왼쪽, 3:위
+    int[] dx = new int[]{0, 1, 0, -1};
+    int[] dy = new int[]{1, 0, -1, 0};
+    
+    for(int i = 2; i <= startNum; i++){
+        // 다음 위치로 이동
+        int nx = x + dx[dir];
+        int ny = y + dy[dir];
+        
+        // 범위를 벗어나거나 경계가 아니면 방향 전환
+        if(!inRange(nx, ny) ){
+            dir = (dir + 1) % 4;
+            nx = x + dx[dir];
+            ny = y + dy[dir];
+        }
+        
+        x = nx;
+        y = ny;
     }
-    else if(idx < 2*n) {
-        // 오른쪽 가장자리: (idx-n, n-1)
-        return new int[]{idx - n, n - 1};
-    }
-    else if(idx < 3*n) {
-        // 아래쪽 가장자리: (n-1, n-1-(idx-2*n))
-        return new int[]{n - 1, n - 1 - (idx - 2*n)};
-    }
-    else {
-        // 왼쪽 가장자리: (n-1-(idx-3*n), 0)
-        return new int[]{n - 1 - (idx - 3*n), 0};
-    }
+    
+    return new int[]{x, y};
 }
+
+// static boolean isBoundary(int x, int y){
+//     return x == 0 || x == n-1 || y == 0 || y == n-1;
+// }
+    // static int[] getStartPos(int startNum){
+    // int idx = startNum - 1;
+    
+    // if(idx < n) {
+    //     // 위쪽 가장자리: (0, idx)
+    //     return new int[]{0, idx};
+    // }
+    // else if(idx < 2*n) {
+    //     // 오른쪽 가장자리: (idx-n, n-1)
+    //     return new int[]{idx - n, n - 1};
+    // }
+    // else if(idx < 3*n) {
+    //     // 아래쪽 가장자리: (n-1, n-1-(idx-2*n))
+    //     return new int[]{n - 1, n - 1 - (idx - 2*n)};
+    // }
+    // else {
+    //     // 왼쪽 가장자리: (n-1-(idx-3*n), 0)
+    //     return new int[]{n - 1 - (idx - 3*n), 0};
+    // }
+// }
     // static int[] getStartPos(int startNum){
     //     if(startNum == 1) return new int[]{0,0};
     //     int [] dx = new int[]{0,1,0,-1};
