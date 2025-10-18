@@ -105,16 +105,20 @@ public class Main {
         int x = 0;
         int y = 0;
         int dir = 0;
-        for(int i = 2; i<=startNum;i++){
-            if(i % (n+1) == 0) {
-                dir = (dir+1) % 4;
+       for(int i = 2; i <= startNum; i++){
+        // n의 배수일 때: 이동 후 방향 전환
+        if(i % n == 0) {
+                x += dx[dir];
+                y += dy[dir];
+                dir = (dir + 1) % 4;
             }
-            else if((i-1) % (n+1) == 0);
-            else{
+            // 일반적인 경우: 그냥 이동
+            else {
                 x += dx[dir];
                 y += dy[dir];
             }
         }
-        return new int[]{x,y};
+        
+        return new int[]{x, y};
     }
 }
