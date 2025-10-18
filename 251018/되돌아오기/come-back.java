@@ -22,6 +22,7 @@ public class Main {
                 }
             }
         }
+        System.out.print(-1);
     }
     static int getDir(char d){
         if(d == 'N') return 0;
