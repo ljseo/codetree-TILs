@@ -106,10 +106,10 @@ public class Main {
         int y = 0;
         int dir = 0;
         for(int i = 2; i<=startNum;i++){
-            if(i % n == 0) {
+            if(i % (n+1) == 0) {
                 dir = (dir+1) % 4;
             }
-            else if((i-1) % n == 0);
+            else if((i-1) % (n+1) == 0);
             else{
                 x += dx[dir];
                 y += dy[dir];
