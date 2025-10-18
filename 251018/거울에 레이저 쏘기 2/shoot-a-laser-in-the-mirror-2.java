@@ -52,35 +52,32 @@ public class Main {
         // else return 3;
         return (startNum-1) / n;
     }
-    static int[] getStartPos(int startNum){
-    if(startNum == 1) return new int[]{0, 0};
+//     static int[] getStartPos(int startNum){
+//     if(startNum == 1) return new int[]{0, 0};
     
-    int x = 0, y = 0;
-    int dir = 0;  // 0:오른쪽, 1:아래, 2:왼쪽, 3:위
-    int[] dx = new int[]{0, 1, 0, -1};
-    int[] dy = new int[]{1, 0, -1, 0};
+//     int x = 0, y = 0;
+//     int dir = 0;  // 0:오른쪽, 1:아래, 2:왼쪽, 3:위
+//     int[] dx = new int[]{0, 1, 0, -1};
+//     int[] dy = new int[]{1, 0, -1, 0};
     
-    for(int i = 2; i <= startNum; i++){
-        // 다음 위치로 이동
-        int nx = x + dx[dir];
-        int ny = y + dy[dir];
+//     for(int i = 2; i <= startNum; i++){
+//         // 다음 위치로 이동
+//         int nx = x + dx[dir];
+//         int ny = y + dy[dir];
         
-        // 범위를 벗어나거나 경계가 아니면 방향 전환
-        if(!inRange(nx, ny) || !isBoundary(nx, ny)){
-            dir = (dir + 1) % 4;
-            nx = x;
-            ny = y;
-        }
-        x = nx;
-        y = ny;
-    }
+//         // 범위를 벗어나거나 경계가 아니면 방향 전환
+//         if(!inRange(nx, ny) ){
+//             dir = (dir + 1) % 4;
+//             nx = x;
+//             ny = y;
+//         }
+//         x = nx;
+//         y = ny;
+//     }
     
-    return new int[]{x, y};
-}
+//     return new int[]{x, y};
+// }
 
-static boolean isBoundary(int x, int y){
-    return x == 0 || x == n-1 || y == 0 || y == n-1;
-}
     // static int[] getStartPos(int startNum){
     // int idx = startNum - 1;
     
@@ -101,27 +98,27 @@ static boolean isBoundary(int x, int y){
     //     return new int[]{n - 1 - (idx - 3*n), 0};
     // }
 // }
-    // static int[] getStartPos(int startNum){
-    //     if(startNum == 1) return new int[]{0,0};
-    //     int [] dx = new int[]{0,1,0,-1};
-    //     int [] dy = new int[]{1,0,-1,0};
-    //     int x = 0;
-    //     int y = 1;
-    //     int dir = 0;
-    //     for(int i = 2; i<=4*n;i++){
-    //         if(i % n == 0) {
-    //             dir = (dir+1) % 4;
-    //         }
-    //         else if((i-1) % n == 0) continue;
-    //         else{
-    //             x += dx[dir];
-    //             y += dy[dir];
-    //         }
-    //         if(i == startNum) {
-    //             // System.out.println(i);
-    //             return new int[]{x,y};
-    //         }
-    //     }
-    //     return new int[]{0,0};
-    // }
+    static int[] getStartPos(int startNum){
+        if(startNum == 1) return new int[]{0,0};
+        int [] dx = new int[]{0,1,0,-1};
+        int [] dy = new int[]{1,0,-1,0};
+        int x = 0;
+        int y = 0;
+        int dir = 0;
+        for(int i = 2; i<=4*n;i++){
+            if(i % n == 0) {
+                dir = (dir+1) % 4;
+            }
+            else if((i-1) % n == 0) continue;
+            else{
+                x += dx[dir];
+                y += dy[dir];
+            }
+            if(i == startNum) {
+                // System.out.println(i);
+                return new int[]{x,y};
+            }
+        }
+        return new int[]{0,0};
+    }
 }
