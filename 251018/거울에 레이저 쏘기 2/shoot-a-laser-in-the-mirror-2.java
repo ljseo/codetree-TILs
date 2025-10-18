@@ -109,7 +109,7 @@ public class Main {
             if(i % n == 0) {
                 dir = (dir+1) % 4;
             }
-            else if((i-1) % n == 0) continue;
+            else if((i-1) % n == 0);
             else{
                 x += dx[dir];
                 y += dy[dir];
