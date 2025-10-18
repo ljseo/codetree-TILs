@@ -105,7 +105,7 @@ public class Main {
         int x = 0;
         int y = 0;
         int dir = 0;
-        for(int i = 2; i<=4*n;i++){
+        for(int i = 2; i<=startNum;i++){
             if(i % n == 0) {
                 dir = (dir+1) % 4;
             }
@@ -114,11 +114,7 @@ public class Main {
                 x += dx[dir];
                 y += dy[dir];
             }
-            if(i == startNum) {
-                // System.out.println(i);
-                return new int[]{x,y};
-            }
         }
-        return new int[]{0,0};
+        return new int[]{x,y};
     }
 }
