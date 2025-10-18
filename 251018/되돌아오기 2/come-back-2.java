@@ -13,8 +13,9 @@ public class Main {
         for(char c : commands.toCharArray()){
             cnt++;
             if(c == 'L'){
-                dir = dir - 1;
-                if(dir == -1) dir = 3;
+                // dir = dir - 1;
+                // if(dir == -1) dir = 3;
+                dir = (dir-1 + 4) % 4;
             }
             else if(c == 'R'){
                 dir = (dir + 1) % 4; 
@@ -22,10 +23,10 @@ public class Main {
             else{
                 x += dx[dir];
                 y += dy[dir];
-                if(x == 0 && y==0){
-                    System.out.print(cnt);
-                    return;
-                }
+            }
+            if(x == 0 && y==0){
+                System.out.print(cnt);
+                return;
             }
         }
         System.out.print(-1);
