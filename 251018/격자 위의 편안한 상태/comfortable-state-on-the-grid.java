@@ -11,7 +11,9 @@ public class Main {
             int r = sc.nextInt();
             int c = sc.nextInt();
             map[r][c] = 1;
-            if(isCom(r,c)) System.out.println(1);
+            if(isCom(r,c)) {
+                System.out.println(1);
+            }
             else System.out.println(0);
         }
     }
@@ -29,6 +31,6 @@ public class Main {
         return cnt>=3;
     }
     static boolean inRange(int r, int c){
-        return 0 <= r && r < n && 0<=c && c < n;
+        return 0 <= r && r <= n && 0<=c && c <= n;
     }
 }
