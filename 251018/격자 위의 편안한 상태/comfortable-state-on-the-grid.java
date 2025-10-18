@@ -28,7 +28,7 @@ public class Main {
                 cnt++;
             }
         }
-        return cnt>=3;
+        return cnt==3;
     }
     static boolean inRange(int r, int c){
         return 0 <= r && r <= n && 0<=c && c <= n;
