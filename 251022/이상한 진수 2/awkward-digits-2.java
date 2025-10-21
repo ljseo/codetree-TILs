@@ -1,23 +1,18 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String a = sc.next();
-        char[] arr = a.toCharArray();
-        boolean flag = false;
-        for(int i = 0; i<arr.length; i++){
-            if(arr[i] == '0'){
-                arr[i] = '1';
-                flag = true;
-                break;
-            }
-        }
-        if(!flag) arr[arr.length - 1]  = '0';
-        String str = "";
-        for(char c : arr){
-            str += c;
-        }
-        System.out.print(Integer.valueOf(str,2));
+        String binary = sc.next();
         
+        int zeroIndex = binary.indexOf('0');
+        
+        if (zeroIndex != -1) {
+            binary = binary.substring(0, zeroIndex) + '1' + binary.substring(zeroIndex + 1);
+        } else {
+            binary = binary.substring(0, binary.length() - 1) + '0';
+        }
+        
+        System.out.print(Integer.parseInt(binary, 2));
     }
 }
