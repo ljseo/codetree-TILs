@@ -24,9 +24,11 @@ public class Main {
             }
         }
         System.out.println(res);
-        ansR++; ansC++;
-        System.out.print(ansR + " " + ansC);
-
+        if(res != 0){
+            ansR++; ansC++;
+            System.out.print(ansR + " " + ansC);
+        }
+        
     }
     static boolean isWin(int r, int c){
         int start = arr[r][c];
