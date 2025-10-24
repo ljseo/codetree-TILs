@@ -1,35 +1,25 @@
 import java.util.Scanner;
 public class Main {
+    static final int MAX_N = 100;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int k = sc.nextInt();
-        int[] candies = new int[n];
-        int[] positions = new int[n];
+        int[] candies = new int[MAX_N + 1];
         for (int i = 0; i < n; i++) {
-            candies[i] = sc.nextInt();
-            positions[i] = sc.nextInt();
+            int cnt = sc.nextInt();
+            int pos = sc.nextInt();
+            candies[pos] += cnt;
         }
 
-        int [] cnt = new int[101];
-        for(int i = 0; i<n; i++){
-            int pos = positions[i];
-            cnt[pos] += candies[i];
-        }
         int mx = 0;
-        if(2* k > 100) {
-            for(int a : cnt){
-                mx += a;
-            }
-        }
-
-        
-        for(int i = 0; i <= 100 -2*k; i++){
+        for(int i = 0; i<=MAX_N; i++){
             int sum = 0;
-            for(int j = 0; j<= 2*k; j++){
-                sum += cnt[i + j];
+            for(int j = i - k; j<= i+k; j++){
+                if(j >= 0 && j <= MAX_N){
+                    sum += candies[j];
+                }
             }
-            //System.out.println(sum);
             mx = Math.max(mx, sum);
         }
         System.out.print(mx);
