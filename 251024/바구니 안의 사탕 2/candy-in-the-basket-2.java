@@ -14,7 +14,7 @@ public class Main {
         int [] cnt = new int[101];
         for(int i = 0; i<n; i++){
             int pos = positions[i];
-            cnt[pos] = candies[i];
+            cnt[pos] += candies[i];
         }
 
         int mx = 0;
