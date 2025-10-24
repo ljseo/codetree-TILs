@@ -16,31 +16,17 @@ public class Main {
         int mx = -1;
 
         for(int i = 0; i<=MAX_N; i++){
-            if(arr[i] != 0){
-                for(int j = i; j<=MAX_N; j++){
-                    if(arr[j] != 0){
-                        int cntG = 0;
-                        int cntH = 0;
-                        for(int k = i; k<=j; k++){
-                            if(arr[k] == 'G') cntG++;
-                            if(arr[k] == 'H') cntH++;
-                        }
-                        if(cntG == cntH) {
-                            mx = Math.max(mx, j-i);
-                        }
-                    }
+            for(int j = i; j<=MAX_N; j++){
+                if(arr[i] == 0 || arr[j] == 0) continue;
+                int cntG = 0;
+                int cntH = 0;
+                for(int k = i; k<=j; k++){
+                    if(arr[k] == 'G') cntG++;
+                    if(arr[k] == 'H') cntH++;
                 }
-
-                int cntSeq = 0;
-                for(int j = i+1; j<=MAX_N; j++){
-                    if(arr[j] != 0){
-                        if(arr[j] == arr[i]) {
-                            cntSeq = j-i;
-                        }
-                        else break;
-                    }
+                if(cntG == cntH || cntH == 0 || cntG == 0) {
+                    mx = Math.max(mx, j-i);
                 }
-                mx = Math.max(mx, cntSeq);
             }
         }
         System.out.print(mx);
