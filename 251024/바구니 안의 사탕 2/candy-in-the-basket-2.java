@@ -16,8 +16,14 @@ public class Main {
             int pos = positions[i];
             cnt[pos] += candies[i];
         }
-
         int mx = 0;
+        if(k > 100) {
+            for(int a : cnt){
+                mx += a;
+            }
+        }
+
+        
         for(int i = 0; i <= 100 -2*k; i++){
             int sum = 0;
             for(int j = 0; j<= 2*k; j++){
