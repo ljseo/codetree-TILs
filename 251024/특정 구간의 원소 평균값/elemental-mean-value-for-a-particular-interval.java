@@ -11,8 +11,10 @@ public class Main {
             int sum = 0;
             for(int j = i; j<n; j++){
                 sum += arr[j];
-                int avg = sum / (j-i+1);;
-                for(int k = i; k<j;k++){
+                
+                double avg = (double)sum / (j-i+1);
+                //System.out.println(sum + " " + avg + " " + (j-i+1));
+                for(int k = i; k<=j;k++){
                     if(arr[k] == avg) {
                         cnt++;
                         break;
