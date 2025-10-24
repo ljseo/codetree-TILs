@@ -33,8 +33,12 @@ public class Main {
 
                 int cntSeq = 0;
                 for(int j = i+1; j<=MAX_N; j++){
-                    if(arr[j] != 0 && arr[j] == arr[i]) cntSeq++;
-                    else break;
+                    if(arr[j] != 0){
+                        if(arr[j] == arr[i]) {
+                            cntSeq = j-i;
+                        }
+                        else break;
+                    }
                 }
                 mx = Math.max(mx, cntSeq);
             }
