@@ -17,7 +17,7 @@ public class Main {
             cnt[pos] += candies[i];
         }
         int mx = 0;
-        if(k > 100) {
+        if(2* k > 100) {
             for(int a : cnt){
                 mx += a;
             }
