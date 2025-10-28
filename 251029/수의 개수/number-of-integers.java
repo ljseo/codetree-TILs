@@ -26,7 +26,7 @@ public class Main {
             int mid = (left + right) / 2;
             if(arr[mid] >= x){
                 right = mid - 1;
-                mn = Math.min(mn, mid);
+                mn = mid;
             }
             else{
                 left = mid + 1;
@@ -43,7 +43,7 @@ public class Main {
             int mid = (left + right) /2 ;
             if(arr[mid] > x){
                 right = mid - 1;
-                mn = Math.min(mn, mid);
+                mn = mid;
             }
             else{
                 left = mid + 1;
