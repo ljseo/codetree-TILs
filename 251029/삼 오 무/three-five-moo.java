@@ -5,7 +5,7 @@ public class Main {
         long n = sc.nextLong();
 
         long left = 1;
-        long right = 1_000_000_000;
+        long right = 2_000_000_000;
         long k = 2_000_000_000;
         while(left <= right){
             long mid = (left + right) / 2;
