@@ -6,7 +6,7 @@ public class Main {
 
         long left = 1;
         long right = 1_000_000_000;
-        long k = 1_000_000_001;
+        long k = Long.MAX_VALUE;
         while(left <= right){
             long mid = (left + right) / 2;
             long seq = getSeq(mid);
