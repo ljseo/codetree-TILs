@@ -8,9 +8,9 @@ public class Main {
 
         System.out.println(getMXN(s));
     }
-    static long getMXN(Long x){
+    static long getMXN(long x){
         long left = 0;
-        long right = x;
+        long right = 1_000_000_000;
         long mx = -1;
         while(left <= right){
             long mid = (left + right) / 2;
