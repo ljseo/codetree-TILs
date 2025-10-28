@@ -6,17 +6,17 @@ public class Main {
 
         long left = 1;
         long right = 1_000_000_000;
-
+        long k = 1_000_000_001;
         while(left <= right){
             long mid = (left + right) / 2;
             long seq = getSeq(mid);
-            if(seq == n){
-                System.out.println(mid);
-                return;
+            if(seq >= n){
+                right = mid - 1;
+                k = mid;
             }
-            if(seq > n) right = mid - 1;
             else left = mid + 1;
         }
+        System.out.print(k);
     }
     static long getSeq(long n){
         long sum = n/3 + n/5 - n/15;
