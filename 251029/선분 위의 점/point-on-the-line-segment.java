@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.*;
 /*
 a: 시작점보다 작으면서 가장 큰 점을 찾고, 없으면 -1
 b : 끝점보다 크면서 가장 작은 점을 찾는다 없으면 n 
@@ -16,6 +17,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+        Arrays.sort(arr);
         int a, b;
         for (int i = 0; i < m; i++) {
             a = sc.nextInt();
@@ -37,7 +39,7 @@ public class Main {
 
             if(arr[mid] < x){
                 left = mid + 1;
-                mxIdx = Math.max(mxIdx, mid);
+                mxIdx = mid;
             }
             else{
                 right = mid - 1;
@@ -54,7 +56,7 @@ public class Main {
             int mid = (left + right) / 2;
             if(arr[mid] > x){
                 right = mid - 1;
-                mnIdx = Math.min(mid,mnIdx);
+                mnIdx = mid;
             }
             else{
                 left = mid + 1;
