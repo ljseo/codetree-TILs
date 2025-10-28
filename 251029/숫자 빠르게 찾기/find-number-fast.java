@@ -14,17 +14,17 @@ public class Main {
             System.out.println(binarySearch(x));
         }
     }
-    static int binarySearch(int n){
+    static int binarySearch(int x){
 
         int left = 0;
         int right = n-1;
 
         while(left <= right){
             int mid = (left + right) / 2;
-            if(arr[mid] == n) {
+            if(arr[mid] == x) {
                 return mid + 1;
             }
-            if(arr[mid] > n){
+            if(arr[mid] > x){
                 right = mid - 1;
             }
             else{
