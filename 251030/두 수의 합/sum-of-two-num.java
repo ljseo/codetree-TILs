@@ -9,14 +9,17 @@ public class Main {
         Map<Long,Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-            map.put(Long.valueOf(arr[i]), map.getOrDefault(arr[i], 0) + 1);
+            map.put(Long.valueOf(arr[i]), map.getOrDefault(Long.valueOf(arr[i]), 0) + 1);
         }
         long sum = 0;
 
         for(Long key : map.keySet()){
-            long value = k - key;
-            if(map.containsKey(value)){
-                sum += map.get(value) * map.get(key);
+            long otherKey = k - key;
+            if(map.containsKey(otherKey)){
+                if(otherKey == key) {
+                    sum += (map.get(otherKey) - 1) * map.get(key);    
+                }
+                else sum += map.get(otherKey) * map.get(key);
             }
             // System.out.println(key + " " + map.get(key) + " " + value);
         }
