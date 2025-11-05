@@ -27,6 +27,7 @@ public class Main {
                 }
             }
         }
+        if(mn == MAX_TOTAL) mn = -1;
         System.out.println(mn);
 
     }
