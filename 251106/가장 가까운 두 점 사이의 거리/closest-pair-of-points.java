@@ -10,7 +10,7 @@ public class Main {
             y[i] = sc.nextInt();
         }
 
-        int distance = 2000;
+        int distance = 20000;
         double res = 0;
 
         for(int i = 0; i<n; i++){
