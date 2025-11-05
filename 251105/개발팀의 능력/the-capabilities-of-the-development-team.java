@@ -19,7 +19,7 @@ public class Main {
                     for(int l = k + 1; l<MAX_N; l++){
                         if(i == k || i == l || j== k || j == l) continue;
                         int first = ability[i] + ability[j];
-                        int second = ability[j] + ability[l];
+                        int second = ability[k] + ability[l];
                         int third = total - first - second;
                         if(first == second || second == third || third == first) continue;
                         mn = Math.min(mn, Math.max(first, Math.max(second, third)) - Math.min(first,Math.min(second, third)));
