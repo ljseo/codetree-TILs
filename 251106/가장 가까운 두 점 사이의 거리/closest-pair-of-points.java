@@ -10,19 +10,18 @@ public class Main {
             y[i] = sc.nextInt();
         }
 
-        int distance = 20000;
-        double res = 0;
+        double distance = Integer.MAX_VALUE;
 
         for(int i = 0; i<n; i++){
             for(int j = i+1; j<n; j++){
                 int xDiff = Math.abs(x[i] - x[j]);
                 int yDiff = Math.abs(y[i] - y[j]);
-                if(distance > xDiff + yDiff){
-                    distance = xDiff + yDiff;
-                    res = Math.pow(xDiff,2) + Math.pow(yDiff,2);
+                double d = Math.pow(xDiff,2) + Math.pow(yDiff,2);
+                if(distance > d){
+                    distance = d;
                 }
             }
         }
-        System.out.println((int)res);
+        System.out.println((int)distance);
     }
 }
