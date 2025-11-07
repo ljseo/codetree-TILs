@@ -8,7 +8,7 @@ public class Main {
         for(int i = 0; i<n; i++){
             String order = sc.next();
             if(order.equals("push")){
-                int num = sc.next();
+                int num = sc.nextInt();
                 stack.push(num);
             }
             if(order.equals("pop")){
@@ -19,6 +19,9 @@ public class Main {
             }
             if(order.equals("top")){
                 System.out.println(stack.peek());
+            }
+            if(order.equals("empty")){
+                System.out.println(stack.isEmpty()? 1:0);
             }
         }
     }
