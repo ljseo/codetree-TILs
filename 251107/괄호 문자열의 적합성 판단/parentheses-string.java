@@ -11,7 +11,7 @@ public class Main {
                 stack.push(1);
             }
             if(c == ')'){
-                if(str.isEmpty()) {
+                if(stack.isEmpty()) {
                     System.out.println("No");
                     return;
                 }
