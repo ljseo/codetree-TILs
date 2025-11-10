@@ -33,6 +33,7 @@ public class Main {
                 for(int a : lists[j]){
                     nextArr[idx++] = a;
                 }
+                lists[j].clear();
             }
             
             arr = nextArr;
