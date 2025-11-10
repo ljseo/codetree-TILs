@@ -9,7 +9,7 @@ public class Main {
         for (int i = 0; i < n; i++)
             arr[i] = sc.nextInt();
 
-        List[] lists = new List[10];
+        List<Integer>[] lists = new List[10];
 
         for(int i = 0; i<10; i++){
             lists[i] = new ArrayList<>();
@@ -31,6 +31,7 @@ public class Main {
                     nextArr[idx++] = a;
                 }
             }
+            
             arr = nextArr;
         }
         for(int a : arr){
