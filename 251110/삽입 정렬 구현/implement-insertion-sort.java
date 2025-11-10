@@ -11,11 +11,12 @@ public class Main {
 
         for(int i = 1; i<n; i++){
             int j = i - 1;
-            while(j >= 0 && arr[j] > arr[i]){
+            int key = arr[i];
+            while(j >= 0 && arr[j] > key){
                 arr[j+1] = arr[j];
                 j--;
             }
-            arr[j+1] = arr[i];
+            arr[j+1] = key;
         }
         for(int a : arr) System.out.print(a + " ");
     }
