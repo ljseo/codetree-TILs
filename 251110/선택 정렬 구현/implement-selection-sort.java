@@ -18,7 +18,7 @@ public class Main {
             }
             int temp = arr[i];
             arr[i] = arr[mnIdx];
-            arr[mnIdx] = arr[i];
+            arr[mnIdx] = temp;
         }
         for(int a : arr) System.out.print(a + " ");
 
