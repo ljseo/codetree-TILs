@@ -20,8 +20,11 @@ public class Main {
             for(int j = 0; j<n; j++){
                 int idx = Integer.toString(arr[j]).length() - i - 1;
                 int val = 0;
-                if(idx < 0) continue;
-                lists[Integer.toString(arr[j]).charAt(idx) - '0'].add(arr[j]);
+                 if(idx < 0) {
+                    lists[0].add(arr[j]);
+                } else {
+                    lists[Integer.toString(arr[j]).charAt(idx) - '0'].add(arr[j]);
+                }
             }
 
             int[] nextArr = new int[n];
@@ -29,7 +32,7 @@ public class Main {
             for(int j = 0; j<10; j++){
                 for(int a : lists[j]){
                     nextArr[idx++] = a;
-                }lists[j].clear();
+                }
             }
             
             arr = nextArr;
