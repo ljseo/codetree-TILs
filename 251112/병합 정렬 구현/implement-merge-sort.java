@@ -2,10 +2,13 @@ import java.util.Scanner;
 
 public class Main {
     static int n;
+    static int[] sorted;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         int[] arr = new int[n];
+        sorted = new int[n];
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
@@ -24,9 +27,10 @@ public class Main {
             merge(arr, low, mid, high);
         }
     }
+
+    
     static void merge(int[] arr, int low, int mid, int high){
         
-        int[] sorted = new int[n];
         int i = low, j = mid + 1;
         int k = low;
         while(i <= mid && j <= high){
