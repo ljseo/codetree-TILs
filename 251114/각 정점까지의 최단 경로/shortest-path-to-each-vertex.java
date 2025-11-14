@@ -76,9 +76,12 @@ public class Main {
             }
         }
 
+        StringBuilder sb = new StringBuilder();
+
         for(int i = 1; i<=n; i++){
-            System.out.println(dist[i]);
+            sb.append(dist[i] == (int)1e9 ? -1 : dist[i]).append("\n");
         }
+        System.out.println(sb);
 
     }
 }
