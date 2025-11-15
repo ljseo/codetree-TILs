@@ -28,6 +28,8 @@ public class Main {
             datas[i] = new Data(x,y);
         }
 
+        Arrays.sort(datas, 0, n, (o1, o2) -> o1.num - o2.num);
+
         int left = 0;
         int right = n-1;
         int mn = Integer.MAX_VALUE;
