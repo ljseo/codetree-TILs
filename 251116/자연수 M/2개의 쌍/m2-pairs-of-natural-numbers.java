@@ -32,7 +32,7 @@ public class Main {
 
         int left = 0;
         int right = n-1;
-        int mn = Integer.MAX_VALUE;
+        int mn = -1;
         while(left <= right){
             while(left < n && datas[left].count == 0){
                 left++;
@@ -50,7 +50,7 @@ public class Main {
             datas[left].count--;
             datas[right].count--;
             int sum = datas[left].num + datas[right].num;
-            mn = Math.min(mn, sum);
+            mn = Math.max(mn, sum);
         }
         System.out.print(mn);
     }
