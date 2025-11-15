@@ -15,9 +15,9 @@ public class Main {
         }
         
         int cnt = 0;
-        for(int i = 1; i<=MAX_N; i++){
+        for(int i = 1; i<=2*n; i++){
             if(cards[i] == 1){
-                for(int j = i+1; j<=MAX_N; j++){
+                for(int j = i+1; j<=2*n; j++){
                     if(cards[j] == 2) {
                         cards[j] = -1;
                         cnt++;
