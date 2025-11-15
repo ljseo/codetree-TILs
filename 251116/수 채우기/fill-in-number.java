@@ -1,22 +1,20 @@
 import java.util.Scanner;
 public class Main {
+
+    static final int MAX_NUM = 100000;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        if(n == 1 || n==3) {
-            System.out.println(-1);
-            return;
+        int ans = MAX_NUM;
+        for(int i = 0; i<MAX_NUM; i++){
+            int remainder = n - i * 5;
+            if(remainder >= 0 && remainder % 2 == 0){
+                ans = Math.min(ans,i + remainder / 2);
+            }
         }
-        int cnt = 0;
-        cnt += n/5;
-        n %= 5;
-
-        if(n%2 != 0) {
-            n+=5;
-            cnt--;
-        }
-        cnt += n/2;
-        System.out.print(cnt);
+        if(ans == MAX_NUM) ans = -1;
+        System.out.println(ans);
         
     }
 }
