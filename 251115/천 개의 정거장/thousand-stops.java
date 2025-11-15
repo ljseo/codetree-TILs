@@ -58,5 +58,30 @@ public class Main {
             }
         }
 
+        Arrays.fill(dist, new Pair(INF,0));
+        dist[a] = new Pair(0,0);
+
+        for(int i = 1; i<=MAX_M; i++){
+
+            int mnIdx = -1;
+
+            for(int j = 1; j<=MAX_M; j++){
+                if(visited[j]) continue;
+                if(mnIdx == -1 || dist[mnIdx].isGreaterThan(dist[j])){
+                    mnIdx = j;
+                }
+            }
+
+            visited[mnIdx] = true;
+
+            for(int j = 1; j<=MAX_M; j++){
+                Pair newP = new Pair(dist[mnIdx].cost + graph[mnIdx][j].cost, dist[mnIdx].time+graph[mnIdx][j].time);
+                if(dist[j].isGreaterThan(newP)){
+                    dist[j] = newP;
+                }
+            }
+
+        }
+        System.out.print(dist[b].cost == INF ? -1 +" "+ -1 : dist[b].cost + " "+ dist[b].time);
     }
 }
