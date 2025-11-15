@@ -8,24 +8,22 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] bCards = new int[n];
-        Arrays.fill(cards,1,2*n+1, 2);
+        
         for (int i = 0; i < n; i++) {
             bCards[i] = sc.nextInt();
             cards[bCards[i]] = 1;
         }
-        
-        int cnt = 0;
-        for(int i = 1; i<=2*n; i++){
+
+        int smallCnt = 0;
+        int ans = 0;
+        for(int i = 1; i<= 2*n; i++){
             if(cards[i] == 1){
-                for(int j = i+1; j<=2*n; j++){
-                    if(cards[j] == 2) {
-                        cards[j] = -1;
-                        cnt++;
-                        break;
-                    }
-                }
+                if(smallCnt > 0) ans++;
+            } 
+            else {
+                smallCnt++;
             }
         }
-        System.out.print(cnt);
+        System.out.print(ans);
     }
 }
