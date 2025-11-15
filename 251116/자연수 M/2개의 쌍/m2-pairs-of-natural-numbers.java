@@ -43,6 +43,10 @@ public class Main {
             }
             if(right < 0) break;
 
+            if(left == right && datas[left].count < 2) {
+                break;
+            }
+
             datas[left].count--;
             datas[right].count--;
             int sum = datas[left].num + datas[right].num;
