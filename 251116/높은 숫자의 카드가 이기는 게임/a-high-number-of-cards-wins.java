@@ -17,8 +17,11 @@ public class Main {
         int smallCnt = 0;
         int ans = 0;
         for(int i = 1; i<= 2*n; i++){
-            if(cards[i] == 1){
-                if(smallCnt > 0) ans++;
+            if(cards[i] != 1){
+                if(smallCnt > 0) {
+                    ans++;
+                    smallCnt--;
+                }
             } 
             else {
                 smallCnt++;
