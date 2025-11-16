@@ -2,20 +2,15 @@ import java.util.*;
 import java.io.*;
 
 class Element implements Comparable<Element>{
-    String str;
-    int openCnt;
-    int closeCnt;
-    public Element (String str){
-        this.str = str;
-        for(char c : str.toCharArray()){
-            if(c == '(') openCnt++;
-            else closeCnt++;
-        }
+    int open;
+    int close;
+    public Element (int open, int close){
+        this.open = open;
+        this.close = close;
     }
     @Override
     public int compareTo(Element e){
-        if(closeCnt == e.closeCnt) return e.openCnt - openCnt;
-        return closeCnt - e.closeCnt; 
+        return e.open * this.close - this.open * e.close;
     }
 }
 
@@ -25,31 +20,37 @@ public class Main {
     static final int MAX_N = 100000;
     static Element[] elements = new Element[MAX_N];
     static int n;
+    static long ans;
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(br.readLine());
         for(int i = 0; i<n; i++){
-            elements[i] = new Element(br.readLine());
+            String s = br.readLine();
+            int open = 0;
+            int close = 0;
+            for(int j = 0; j < s.length(); j++){
+                if(s.charAt(j) == ')') {
+                    close++;
+                    ans+=open;
+                }
+                else {
+                    open++;
+                }
+            }
+            elements[i] = new Element(open,close);
         }
         Arrays.sort(elements,0,n);
 
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i<n; i++){
-            // System.out.println(elements[i].str);
-            sb.append(elements[i].str);
+        int openSum = 0;
+        for(int i = 0; i < n; i++){
+            int open = elements[i].open;
+            int close = elements[i].close;
+
+            ans += (long) openSum * close;
+            openSum += open;
         }
-        // System.out.println(sb);
-        String sumStr = sb.toString();
-        int closeCnt = 0;
-        for(char c : sumStr.toCharArray()){
-            if(c == ')') closeCnt++;
-        }
-        long total = 0;
-        for(char c : sumStr.toCharArray()){
-            if(c == ')') closeCnt--;
-            else total += closeCnt;
-        }
-        System.out.println(total);
+        System.out.println(ans);
+
     }
 }
