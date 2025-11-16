@@ -45,7 +45,7 @@ public class Main {
         for(char c : sumStr.toCharArray()){
             if(c == ')') closeCnt++;
         }
-        int total = 0;
+        long total = 0;
         for(char c : sumStr.toCharArray()){
             if(c == ')') closeCnt--;
             else total += closeCnt;
