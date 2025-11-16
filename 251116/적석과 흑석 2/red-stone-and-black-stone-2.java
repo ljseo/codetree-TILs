@@ -10,8 +10,19 @@ class Black implements Comparable<Black>{
     }
     @Override
     public int compareTo(Black black){
-        if(b == black.b) return black.a - a;
-        return black.b - b; 
+        return a - black.a; 
+    }
+}
+class Element implements Comparable<Element>{
+    int a;
+    int b;
+    public Element(int a, int b){
+        this.a = a;
+        this.b = b;
+    }
+    @Override
+    public int compareTo(Element Element){
+        return b - Element.b; 
     }
 }
 
@@ -23,6 +34,7 @@ public class Main {
     static int c,n;
     static Integer[] reds = new Integer[MAX_C];
     static Black[] blacks = new Black[MAX_N];
+    static PriorityQueue<Element> pq = new PriorityQueue<>();
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -38,28 +50,28 @@ public class Main {
             int b = Integer.parseInt(st.nextToken());
             blacks[i] = new Black(a,b);
         }
-        Arrays.sort(reds,0,c,(o1, o2) -> o2-o1);
+        Arrays.sort(reds,0,c,(o1, o2) -> o1-o2);
         Arrays.sort(blacks,0,n);
         
         int redIdx = 0;
         int blackIdx = 0;
         int cnt = 0;
         while(redIdx < c && blackIdx < n){
-            int redNum = reds[redIdx];
+            int redNum = reds[redIdx++];
             Black blackNum = blacks[blackIdx];
-            int a = blackNum.a;
-            int b = blackNum.b;
-            if(a <= redNum && redNum <= b){
+            while(blackIdx < n && blackNum.a <= redNum){
+                pq.add(new Element(blackNum.a, blackNum.b));
+                blackNum = blacks[++blackIdx];
+            }
+
+            while(!pq.isEmpty() && pq.peek().b < redNum){
+                pq.poll();
+            }
+            if(!pq.isEmpty() && pq.peek().b >= redNum){
                 cnt++;
-                redIdx++;
-                blackIdx++;
+                pq.poll();
             }
-            else if(redNum < a) {
-                blackIdx++;
-            }
-            else if(b < redNum) {
-                redIdx++;
-            }
+
         }
         System.out.print(cnt);
     }
