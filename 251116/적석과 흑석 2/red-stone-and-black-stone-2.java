@@ -21,8 +21,8 @@ class Element implements Comparable<Element>{
         this.b = b;
     }
     @Override
-    public int compareTo(Element Element){
-        return b - Element.b; 
+    public int compareTo(Element e){
+        return b - e.b; 
     }
 }
 
@@ -58,10 +58,9 @@ public class Main {
         int cnt = 0;
         while(redIdx < c && blackIdx < n){
             int redNum = reds[redIdx++];
-            Black blackNum = blacks[blackIdx];
-            while(blackIdx < n && blackNum.a <= redNum){
-                pq.add(new Element(blackNum.a, blackNum.b));
-                blackNum = blacks[++blackIdx];
+            while(blackIdx < n && blacks[blackIdx].a <= redNum){
+                pq.add(new Element(blacks[blackIdx].a, blacks[blackIdx].b));
+                blackIdx++;
             }
 
             while(!pq.isEmpty() && pq.peek().b < redNum){
