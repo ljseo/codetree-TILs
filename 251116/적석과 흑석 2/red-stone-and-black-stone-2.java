@@ -56,7 +56,7 @@ public class Main {
         int redIdx = 0;
         int blackIdx = 0;
         int cnt = 0;
-        while(redIdx < c && blackIdx < n){
+        while(redIdx < c){
             int redNum = reds[redIdx++];
             while(blackIdx < n && blacks[blackIdx].a <= redNum){
                 pq.add(new Element(blacks[blackIdx].a, blacks[blackIdx].b));
