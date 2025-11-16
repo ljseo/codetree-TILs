@@ -10,7 +10,7 @@ class Black implements Comparable<Black>{
     }
     @Override
     public int compareTo(Black black){
-        if(b == black.b) return a - black.a;
+        if(b == black.b) return black.a - a;
         return black.b - b; 
     }
 }
