@@ -6,13 +6,13 @@ public class Main {
         int mx = -1;
         String s = sc.next();
         mn = Math.min(mn, s.length());
-        mx = Math.max(mn, s.length());
+        mx = Math.max(mx, s.length());
         s = sc.next();
         mn = Math.min(mn, s.length());
-        mx = Math.max(mn, s.length());
+        mx = Math.max(mx, s.length());
         s = sc.next();
         mn = Math.min(mn, s.length());
-        mx = Math.max(mn, s.length());
+        mx = Math.max(mx, s.length());
 
         System.out.print(mx - mn);
     }
