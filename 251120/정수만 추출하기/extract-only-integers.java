@@ -4,13 +4,19 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String a = sc.next();
         String b = sc.next();
-        int aIdx = 0;
+        int aIdx = a.length();
         for(int i = 0; i < a.length(); i++){
-            if(!Character.isDigit(a.charAt(i))) aIdx = i;
+            if(!Character.isDigit(a.charAt(i))) {
+                aIdx = i;
+                break;
+            }
         }
-        int bIdx = 0;
+        int bIdx = b.length();
         for(int i = 0; i < b.length(); i++){
-            if(!Character.isDigit(b.charAt(i))) bIdx = i;
+            if(!Character.isDigit(b.charAt(i))) {
+                bIdx = i;
+                break;
+            }
         }
         int aa = Integer.parseInt(a.substring(0,aIdx));
         int bb = Integer.parseInt(b.substring(0,bIdx));
