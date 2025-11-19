@@ -6,7 +6,7 @@ public class Main {
 
         while(s.length() > 1){
             int a = sc.nextInt();
-            if(s.length() < a){
+            if(s.length() <= a){
                 s = s.substring(0,s.length()-1);
             }
             else{
