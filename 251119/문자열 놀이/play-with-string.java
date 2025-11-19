@@ -7,9 +7,8 @@ public class Main {
         while(q-->0){
             int order = sc.nextInt();
             if(order == 1){
-                int a = sc.nextInt();
-                int b = sc.nextInt();
-                System.out.println(a + " " + b);
+                int a = sc.nextInt()-1;
+                int b = sc.nextInt()-1;
                 char ca = s.charAt(a);
                 char cb = s.charAt(b);
                 s = s.substring(0,a) + cb + s.substring(a+1, s.length());
@@ -22,7 +21,6 @@ public class Main {
                 char [] arr = s.toCharArray();
                 for(int i = 0; i<arr.length; i++){
                     if(arr[i] == x) arr[i] = y;
-                    else if(arr[i] == y) arr[i] = x;
                 }
                 s = String.valueOf(arr);
                 System.out.println(s);
