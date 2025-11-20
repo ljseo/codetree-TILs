@@ -4,24 +4,31 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int t = sc.nextInt();
-        int[] arr = new int[2*n];
+        int[] top = new int[n];
+        int[] bottom = new int[n];
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            top[i] = sc.nextInt();
         }
-        for (int i = n; i < 2*n; i++) {
-            arr[i] = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            bottom[i] = sc.nextInt();
         }
-
         while(t-->0){
-            int temp = arr[arr.length-1];
-            for(int i = 2*n-1; i > 0; i--){
-                arr[i] = arr[i-1];
+            int temp = top[top.length-1];
+            for(int i = n-1; i > 0; i--){
+                top[i] = top[i-1];
             }
-            arr[0] = temp;
+            top[0] = bottom[n-1];
+            for(int i = n-1; i > 0; i--){
+                bottom[i] = bottom[i-1];
+            }
+            bottom[0] = temp;
         }
-        for(int i = 0; i < 2*n; i++){
-            if(i == n) System.out.println();
-            System.out.print(arr[i] + " ");
+        for(int i = 0; i < n; i++){
+            System.out.print(top[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < n; i++){
+            System.out.print(bottom[i] + " ");
         }
     }
 }
