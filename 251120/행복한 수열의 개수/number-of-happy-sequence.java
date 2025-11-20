@@ -15,7 +15,7 @@ public class Main {
         for(int i = 0; i < n; i++){
             int num = grid[i][0];
             int seq = 1;
-            int mxSeq = -1;
+            int mxSeq = 1;
             for(int j = 1; j < n; j++){
                 int num2 = grid[i][j];
                 if(num == num2){
@@ -34,7 +34,7 @@ public class Main {
         for(int i = 0; i < n; i++){
             int num = grid[0][i];
             int seq = 1;
-            int mxSeq = -1;
+            int mxSeq = 1;
             for(int j = 1; j < n; j++){
                 int num2 = grid[j][i];
                 if(num == num2){
