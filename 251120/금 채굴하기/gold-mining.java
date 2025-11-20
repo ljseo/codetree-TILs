@@ -4,50 +4,21 @@ public class Main {
 
     static int n,m;
     static int[][] grid;
-
-    static int[][] bluck1 = new int[][]{
-        {0,1,0},
-        {1,1,1},
-        {0,1,0}
-    };
-    static int[][] bluck2 = new int[][]{
-        {0,0,1,0,0},
-        {0,1,1,1,0},
-        {1,1,1,1,1},
-        {0,1,1,1,0},
-        {0,0,1,0,0}
-    };
     
-    static int getMaxGold(int i, int j){
-        int maxGold = 0;
-        if(grid[i][j] == 1){
-            if(m >= 1) maxGold = 1;
-        }
-        
-        int goldCnt = 0;
-        for(int k = 0; k < bluck1.length; k++){
-            for(int l = 0; l < bluck1[k].length; l++){
-                if(bluck1[k][l] != 1) continue;
-                if(n <= i + k || n <= j + l) continue;
-                if(grid[i+k][j+l] == 1) goldCnt++;
+    static int getNumOfGold(int row, int col, int k){
+        int numOfGold = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if(Math.abs(row-i) + Math.abs(col-j) <= k){
+                    if(grid[i][j] == 1) numOfGold++;
+                }
             }
         }
-        if(goldCnt * m > 4) {
-            maxGold = goldCnt;
-        }
+        return numOfGold;
+    }
 
-        goldCnt = 0;
-        for(int k = 0; k < bluck2.length; k++){
-            for(int l = 0; l < bluck2[k].length; l++){
-                if(bluck2[k][l] != 1) continue;
-                if(n <= i + k || n <= j + l) continue;
-                if(grid[i+k][j+l] == 1) goldCnt++;
-            }
-        }
-        if(goldCnt * m > 13) {
-            maxGold = goldCnt;
-        }
-        return maxGold;
+    static int getArea(int k){
+        return k*k + (k+1) * (k+1);
     }
 
     public static void main(String[] args) {
@@ -60,9 +31,14 @@ public class Main {
                 grid[i][j] = sc.nextInt();
 
         int maxGold = 0;
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                maxGold = Math.max(maxGold, getMaxGold(i,j));
+        for(int row = 0; row < n; row++){
+            for(int col = 0; col < n; col++){
+                for(int k = 0; k <= 2*(n-1); k++){
+                    int numOfGold = getNumOfGold(row, col, k);
+                    if(getArea(k) <= numOfGold * m){
+                        maxGold = Math.max(maxGold, numOfGold);
+                    }
+                }
             }
         }
         System.out.print(maxGold);
