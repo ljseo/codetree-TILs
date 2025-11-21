@@ -40,6 +40,7 @@ public class Main {
         }
         bombsNum = new int[bombPosCnt];
         createBombsSeq(0);
+        System.out.println(mx);
     }
 
 
@@ -64,7 +65,7 @@ public class Main {
         int cnt = 0;
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
-                if(temp == -1) cnt++;
+                if(temp[i][j] == -1) cnt++;
             }
         }
         return cnt;
@@ -72,8 +73,8 @@ public class Main {
 
     static void destroyArea(int row, int col, int bombNum){
         for(int i = 0; i < BOMBS_DIR; i++){
-            int nr = row + bombsDr[i];
-            int nc = col + bombsDc[i];
+            int nr = row + bombsDr[bombNum][i];
+            int nc = col + bombsDc[bombNum][i];
             if(inRange(nr, nc)){
                 temp[nr][nc] = -1;
             }
