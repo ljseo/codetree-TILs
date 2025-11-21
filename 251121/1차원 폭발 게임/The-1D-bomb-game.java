@@ -56,7 +56,8 @@ public class Main {
                 cnt++;
             }
         }
-        if(cnt >= m){
+        
+        if(n != 0 && cnt >= m){
             flag = true;
             for(int j = 1; j <= cnt; j++){
                 blocks[n-j] = 0;
