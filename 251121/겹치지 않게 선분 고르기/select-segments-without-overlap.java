@@ -47,7 +47,8 @@ public class Main {
 
         int len = selected.size();
         for(int i = 0; i < len; i++){
-            for(int j = i + 1; j < len; j++){
+            for(int j = 0; j < len; j++){
+                if(i == j) continue;
                 Line line1 = selected.get(i);
                 Line line2 = selected.get(j);
                 if((line2.start <= line1.end && line1.start <= line2.start) 
