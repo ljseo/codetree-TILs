@@ -35,16 +35,18 @@ public class Main {
         Collections.sort(lines, (o1, o2) -> {
             return o1.height - o2.height;
         });
+        Collections.sort(selected, (o1, o2) -> {
+            return o1.height - o2.height;
+        });
         simulation(); // 주어진 모든 가로줄을 선택하고 시뮬레이션, 그 결과를 초기값으로 설정 
         for(int i = 0; i < n; i++){
             targetRes[i] = simulationRes[i];
         }
         
         for(int i = 0; i < m; i++){
-            for(int i = 0; i < selected.size(); i++){
-                selected.remove(selected.size()-1);
-            }      
+            selected.clear();   
             selectLine(0,0,i);
+            if(isFind) break;
         }
 
     }
@@ -62,9 +64,6 @@ public class Main {
                     }
                 }
                 if(flag) {
-                    for(Line l : selected){
-                        System.out.print("line: " + l.width + " " + l.height + " ");
-                    }
                     System.out.println(currentCnt);
                     isFind = true;
                 }
@@ -75,21 +74,21 @@ public class Main {
 
         if(selected.size() == 0){
             selected.add(lines.get(currentIdx));
-            selectLine(currentCnt+1, currentIdx+1, targetCnt);
+            selectLine(currentIdx+1, currentCnt+1, targetCnt);
             selected.remove(selected.size()-1);
-            selectLine(currentCnt, currentIdx+1, targetCnt);
+            selectLine(currentIdx+1, currentCnt, targetCnt);
         }
         else {
             Line previous = selected.get(selected.size()-1);
             Line current = lines.get(currentIdx);
             if(previous.height == current.height && previous.width == (current.width-1)){
-                selectLine(currentCnt, currentIdx+1, targetCnt);
+                selectLine(currentIdx+1, currentCnt, targetCnt);
             }
             else{
                 selected.add(current);
-                selectLine(currentCnt+1, currentIdx+1, targetCnt);
+                selectLine(currentIdx+1, currentCnt+1, targetCnt);
                 selected.remove(selected.size()-1);
-                selectLine(currentCnt, currentIdx+1, targetCnt);
+                selectLine(currentIdx+1, currentCnt, targetCnt);
             }
         }
 
