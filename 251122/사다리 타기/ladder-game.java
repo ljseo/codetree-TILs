@@ -32,23 +32,25 @@ public class Main {
             lines.add(new Line(a,b));
             selected.add(new Line(a,b));
         }
+        Collections.sort(lines, (o1, o2) -> {
+            return o1.height - o2.height;
+        });
         simulation(); // 주어진 모든 가로줄을 선택하고 시뮬레이션, 그 결과를 초기값으로 설정 
         for(int i = 0; i < n; i++){
             targetRes[i] = simulationRes[i];
         }
-
-        Collections.sort(lines, (o1, o2) -> {
-            return o1.height - o2.height;
-        });
-
+        
         for(int i = 0; i < m; i++){
-            if(isFind) break;
+            for(int i = 0; i < selected.size(); i++){
+                selected.remove(selected.size()-1);
+            }      
             selectLine(0,0,i);
         }
 
     }
 
     static void selectLine(int currentIdx, int currentCnt, int targetCnt){
+
         if(currentCnt == targetCnt){
             if(!isFind) {
                 simulation();
@@ -59,14 +61,17 @@ public class Main {
                         break;
                     }
                 }
-                if(falg) {
+                if(flag) {
+                    for(Line l : selected){
+                        System.out.print("line: " + l.width + " " + l.height + " ");
+                    }
                     System.out.println(currentCnt);
                     isFind = true;
                 }
-
             }
             return;
         }
+        if(currentIdx >= m ) return;
 
         if(selected.size() == 0){
             selected.add(lines.get(currentIdx));
@@ -95,19 +100,11 @@ public class Main {
         for(int i = 0; i < n; i++){
             simulationRes[i] = i;
         }
-
-        Collections.sort(selected, (o1, o2) -> {
-            return o1.height - o2.height;
-        });
-        // System.out.println(selected.size());
-        // for(Line l : selected){
-        //     System.out.println(l.width + "  " + l.height);
-        // }
         
         for(int i = 0; i < selected.size(); i++){
         
             int start = selected.get(i).width;
-            int end = width + 1;
+            int end = selected.get(i).width + 1;
 
             for(int j = 0; j < n; j++){
                 if(simulationRes[j] == start) {
@@ -118,7 +115,5 @@ public class Main {
                 }
             }
         }
-        
-
     }
 }
