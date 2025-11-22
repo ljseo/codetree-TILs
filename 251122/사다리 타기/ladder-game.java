@@ -20,14 +20,13 @@ public class Main {
     static final int MAX_N = 11;
 
     static int n,m;
+    static int ans = Integer.MAX_VALUE;
 
     static ArrayList<Line> lines = new ArrayList<>();
     static ArrayList<Line> selected = new ArrayList<>();
 
     static int[] targetRes = new int[MAX_N + 1];
     static int[] simulationRes = new int[MAX_N + 1];
-
-    static boolean isFind = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -48,11 +47,8 @@ public class Main {
             targetRes[i] = simulationRes[i];
         }
         selected.clear();   
-        for(int i = 0; i <= m; i++){
-            selected.clear();   
-            selectLine(0,0,i);
-            if(isFind) break;
-        }
+        selectLine(0);
+        System.out.println(ans);
 
     }
     static void simulation(){
@@ -70,32 +66,27 @@ public class Main {
         }
     }
 
-    static void selectLine(int currentIdx, int currentCnt, int targetCnt){
+    static void selectLine(int currentCnt){
 
-        if(currentCnt == targetCnt){
-            if(!isFind) {
-                simulation();
-                boolean flag = true;
-                for(int i = 0; i < n; i++){
-                    if(simulationRes[i] != targetRes[i]) {
-                        flag = false;
-                        break;
-                    }
+        if(currentCnt == m){
+            simulation();
+            boolean flag = true;
+            for(int i = 0; i < n; i++){
+                if(simulationRes[i] != targetRes[i]) {
+                    flag = false;
+                    break;
                 }
-                if(flag) {
-                    System.out.println(currentCnt);
-                    isFind = true;
-                }
+            }
+            if(flag) {
+                ans = Math.min(ans, selected.size());
             }
             return;
         }
 
-        if(currentIdx >= m ) return;
-        selected.add(lines.get(currentIdx));
-        selectLine(currentIdx+1, currentCnt+1, targetCnt);
+        selected.add(lines.get(currentCnt));
+        selectLine(currentCnt+1);
         selected.remove(selected.size()-1);
-        selectLine(currentIdx+1, currentCnt, targetCnt);
-    
+        selectLine(currentCnt+1);
 
     }
 }
