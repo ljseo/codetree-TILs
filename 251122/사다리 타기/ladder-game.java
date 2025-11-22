@@ -43,7 +43,7 @@ public class Main {
             targetRes[i] = simulationRes[i];
         }
         
-        for(int i = 0; i < m; i++){
+        for(int i = 0; i <= m; i++){
             selected.clear();   
             selectLine(0,0,i);
             if(isFind) break;
