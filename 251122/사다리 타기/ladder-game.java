@@ -1,12 +1,18 @@
 import java.util.*;
 
 
-class Line{
+class Line implements Comparable<Line> {
     int width;
     int height;
     public Line(int width, int height){
         this.width = width;
         this.height = height;
+    }
+
+    @Override
+    public int compareTo(Line l){
+        if(this.height == l.height) return this.width - l.width;
+        return this.height - l.height;
     }
 }
 public class Main {
@@ -14,8 +20,10 @@ public class Main {
     static final int MAX_N = 11;
 
     static int n,m;
+
     static ArrayList<Line> lines = new ArrayList<>();
     static ArrayList<Line> selected = new ArrayList<>();
+
     static int[] targetRes = new int[MAX_N + 1];
     static int[] simulationRes = new int[MAX_N + 1];
 
@@ -30,25 +38,36 @@ public class Main {
             int a = sc.nextInt() - 1; // zero-base
             int b = sc.nextInt() - 1;
             lines.add(new Line(a,b));
-            selected.add(new Line(a,b));
         }
-        Collections.sort(lines, (o1, o2) -> {
-            return o1.height - o2.height;
-        });
-        Collections.sort(selected, (o1, o2) -> {
-            return o1.height - o2.height;
-        });
+        Collections.sort(lines);
+        for(Line l : lines){
+            selected.add(l);
+        }
         simulation(); // 주어진 모든 가로줄을 선택하고 시뮬레이션, 그 결과를 초기값으로 설정 
         for(int i = 0; i < n; i++){
             targetRes[i] = simulationRes[i];
         }
-        
+        selected.clear();   
         for(int i = 0; i <= m; i++){
             selected.clear();   
             selectLine(0,0,i);
             if(isFind) break;
         }
 
+    }
+    static void simulation(){
+        
+        for(int i = 0; i < n; i++){
+            simulationRes[i] = i;
+        }
+        
+        for(int i = 0; i < selected.size(); i++){
+            int start = selected.get(i).width;
+            int end = selected.get(i).width + 1;
+            int temp = simulationRes[start];
+            simulationRes[start] = simulationRes[end];
+            simulationRes[end] = temp;
+        }
     }
 
     static void selectLine(int currentIdx, int currentCnt, int targetCnt){
@@ -70,49 +89,13 @@ public class Main {
             }
             return;
         }
+
         if(currentIdx >= m ) return;
+        selected.add(lines.get(currentIdx));
+        selectLine(currentIdx+1, currentCnt+1, targetCnt);
+        selected.remove(selected.size()-1);
+        selectLine(currentIdx+1, currentCnt, targetCnt);
+    
 
-        if(selected.size() == 0){
-            selected.add(lines.get(currentIdx));
-            selectLine(currentIdx+1, currentCnt+1, targetCnt);
-            selected.remove(selected.size()-1);
-            selectLine(currentIdx+1, currentCnt, targetCnt);
-        }
-        else {
-            Line previous = selected.get(selected.size()-1);
-            Line current = lines.get(currentIdx);
-            if(previous.height == current.height && previous.width == (current.width-1)){
-                selectLine(currentIdx+1, currentCnt, targetCnt);
-            }
-            else{
-                selected.add(current);
-                selectLine(currentIdx+1, currentCnt+1, targetCnt);
-                selected.remove(selected.size()-1);
-                selectLine(currentIdx+1, currentCnt, targetCnt);
-            }
-        }
-
-    }
-
-    static void simulation(){
-        
-        for(int i = 0; i < n; i++){
-            simulationRes[i] = i;
-        }
-        
-        for(int i = 0; i < selected.size(); i++){
-        
-            int start = selected.get(i).width;
-            int end = selected.get(i).width + 1;
-
-            for(int j = 0; j < n; j++){
-                if(simulationRes[j] == start) {
-                    simulationRes[j]++;
-                }
-                else if(simulationRes[j] == end){
-                    simulationRes[j]--;
-                }
-            }
-        }
     }
 }
