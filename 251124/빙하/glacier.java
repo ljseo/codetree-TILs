@@ -17,6 +17,7 @@ public class Main {
     static int[][] grid = new int[MAX_NUM][MAX_NUM];
     static boolean[][] visited = new boolean[MAX_NUM][MAX_NUM];
     static int[][] cnt = new int[MAX_NUM][MAX_NUM];
+    static boolean[][] vis = new boolean[MAX_NUM][MAX_NUM];
     
     static Deque<Point> queue = new ArrayDeque<>();
 
@@ -96,7 +97,9 @@ public class Main {
     static boolean isSurround(int row, int col){
         
         Deque<Point> q = new ArrayDeque<>();
-        boolean[][] vis = new boolean[MAX_NUM][MAX_NUM];
+        for(int i = 0; i < n; i++){
+            Arrays.fill(vis[i], false);
+        }
         q.add(new Point(row, col));
         vis[row][col] = true;
         while(!q.isEmpty()){
