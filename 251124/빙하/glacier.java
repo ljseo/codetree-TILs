@@ -87,15 +87,26 @@ public class Main {
 
     static boolean isSurround(int row, int col){
         
-        int cnt = 0;
-        for(int i = 0; i < 4; i++){
-            int nr = row + dr[i];
-            int nc = col + dc[i];
-            if(!isRange(nr, nc)) return true;
-            if(grid[nr][nc] == 1) cnt++;
+        Deque<Point> q = new ArrayDeque<>();
+        boolean[][] vis = new boolean[MAX_NUM][MAX_NUM];
+        q.add(new Point(row, col));
+        vis[row][col] = true;
+        while(!q.isEmpty()){
+            Point current = q.poll();
+
+            if(current.r == 0 || current.r == n-1 || current.c == 0 || current.c == m-1) return false;
+
+            for(int i = 0; i < 4; i++){
+                int nr = current.r + dr[i];
+                int nc = current.c + dc[i];
+                if(!isRange(nr, nc) || vis[nr][nc]) continue;
+                if(grid[nr][nc] == 0) {
+                    q.add(new Point(nr, nc));
+                    vis[nr][nc] = true;
+                }
+            }
         }
-        if(cnt == 4) return true;
-        return false;
+        return true;
     }
 
     static boolean isRange(int row, int col){
