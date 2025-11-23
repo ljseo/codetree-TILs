@@ -14,7 +14,6 @@ public class Main {
     static final int MAX_N = 100;
     
     static int n,k;
-    static int startRow,startCol;
 
     static int[][] grid =  new int[MAX_N][MAX_N];
     static boolean[][] visited = new boolean[MAX_N][MAX_N];
@@ -23,6 +22,8 @@ public class Main {
 
     static int[] dr = {-1, 1, 0, 0};
     static int[] dc = { 0, 0,-1, 1};
+
+    static Point curr;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -33,31 +34,26 @@ public class Main {
                 grid[i][j] = sc.nextInt();
             }
         }
-        startRow = sc.nextInt() - 1;
-        startCol = sc.nextInt() - 1;
-
+        int startRow = sc.nextInt() - 1;
+        int startCol = sc.nextInt() - 1;
+        curr = new Point(startRow, startCol);
         
         while(k-->0){
-            bfs(startRow, startCol);
+            if(!move()) break;
         }
-        startRow++;
-        startCol++;
-        System.out.println(startRow + " " + startCol);
+        System.out.print((curr.row+1) + " " + (curr.col+1));
         
     }
 
-    static void bfs(int row, int col){
+    static List<Point> bfs(Point start){
         
-        
-        for(int i = 0; i < n; i++){
-            Arrays.fill(visited[i], false);
-        }
-        queue.add(new Point(row, col));
-        visited[row][col] = true;
-        int standValue = grid[row][col];
-        int mxRow = -1;
-        int mxCol = -1;
-        int mx = -1;
+        clearVisited();
+        int baseValue = grid[start.row][start.col];
+        queue.add(new Point(start.row, start.col));
+        visited[start.row][start.col] = true;
+
+        List<Point> reachable = new ArrayList<>();
+
         while(!queue.isEmpty()){
             
             Point currentPoint = queue.poll();
@@ -65,35 +61,20 @@ public class Main {
             for(int i = 0; i < 4; i++){
                 int nr = currentPoint.row + dr[i];
                 int nc = currentPoint.col + dc[i];
-
-                if(isValid(nr, nc, standValue)){
-                    if(grid[nr][nc] > mx){
-                        mx = grid[nr][nc];
-                        mxRow = nr;
-                        mxCol = nc;
-                    }
-                    else if(grid[nr][nc] == mx){
-                        if(nr < mxRow){
-                            mxRow = nr;
-                            mxCol = nc;
-                        }
-                        else if(nr == mxRow && nc < mxCol){
-                            mxCol = nc;
-                        }
-                    }
+                
+                if(canGo(nr, nc, baseValue)){
                     queue.add(new Point(nr, nc));
                     visited[nr][nc] = true;
+                    
+                    reachable.add(new Point(nr, nc));
                 }
             }
         }
-        if(mxRow != -1 && mxCol != -1){
-            startRow = mxRow;
-            startCol = mxCol;
-        }
+        return reachable;
         
     }
     
-    static boolean isValid(int row, int col, int value){
+    static boolean canGo(int row, int col, int value){
 
         if(!inRange(row, col)) return false;
         if(visited[row][col]) return false;
@@ -103,5 +84,32 @@ public class Main {
 
     static boolean inRange(int row, int col){
         return 0 <= row && row < n && 0 <= col && col < n;
+    }
+
+    static void clearVisited (){
+        for(int i = 0; i < n; i++){
+            Arrays.fill(visited[i], false);
+        }
+    }
+
+    static Point pickBest(List<Point> list){
+        if(list.isEmpty()) return null;
+
+        list.sort((a,b) -> {
+            if(grid[a.row][a.col] != grid[b.row][b.col]){
+                return grid[b.row][b.col] - grid[a.row][a.col];
+            }
+            if(a.row != b.row) return a.row - b.row;
+            return a.col - b.col;
+        });
+        return list.get(0);
+    }
+
+    static boolean move(){
+        List<Point> reachable = bfs(curr);
+        Point next = pickBest(reachable);
+        if(next == null) return false;
+        curr = next;
+        return true;
     }
 }
