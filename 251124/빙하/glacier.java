@@ -33,6 +33,7 @@ public class Main {
             for(int j = 0; j < m; j++){
                 grid[i][j] = sc.nextInt();
             }
+            Arrays.fill(cnt[i], 10000);
         }
         addIce();
         while(!queue.isEmpty()){
@@ -41,11 +42,18 @@ public class Main {
             for(int i = 0; i < 4; i++){
                 int nr = p.r + dr[i];
                 int nc = p.c + dc[i];
-                if(isRange(nr,nc) && !visited[nr][nc] && grid[nr][nc] == 1){
-                    grid[nr][nc] = 0;
-                    queue.add(new Point(nr, nc));
-                    visited[nr][nc] = true;
-                    cnt[nr][nc] = cnt[p.r][p.c] + 1;
+                if(isRange(nr,nc) && !visited[nr][nc]){
+                    if(grid[nr][nc] == 1){
+                        // 얼음(비용 1): 큐의 뒤에 추가
+                        cnt[nr][nc] = cnt[p.r][p.c] + 1;
+                        visited[nr][nc] = true;
+                        queue.addLast(new Point(nr, nc)); 
+                    } else {
+                        // 물(비용 0): 큐의 앞에 추가 (새치기) -> 그래야 최단 거리 보장
+                        cnt[nr][nc] = cnt[p.r][p.c];
+                        visited[nr][nc] = true;
+                        queue.addFirst(new Point(nr, nc)); 
+                    }
                 }
             }
         }
@@ -53,12 +61,12 @@ public class Main {
         int mx = -1;
         int mxCnt = 0;
         for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                if(cnt[i][j] > mx){
+            for(int j = 0; j < m; j++){
+                if(grid[i][j] == 1 && cnt[i][j] > mx){
                     mx = cnt[i][j];
                     mxCnt = 1;
                 }
-                else if(cnt[i][j] == mx) {
+                else if(grid[i][j] == 1 && cnt[i][j] == mx) {
                     mxCnt++;
                 }
             }
