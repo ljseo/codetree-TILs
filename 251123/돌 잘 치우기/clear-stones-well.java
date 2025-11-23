@@ -40,8 +40,8 @@ public class Main {
             }
         }
         for(int i = 0; i < k; i++){
-            int r = sc.nextInt();
-            int c = sc.nextInt();
+            int r = sc.nextInt() - 1;
+            int c = sc.nextInt() - 1;
             startPoints[i] = new Point(r,c);
         }
         selectStones(0);
@@ -61,14 +61,10 @@ public class Main {
 
         Point p = stones.get(cnt);
         selectedStones.add(new Point(p.r, p.c));
-        for(Point p : selectedStones){
-            System.out.println(p.r + " " + p.c);
-        }
+
         selectStones(cnt+1);
         selectedStones.remove(selectedStones.size()-1);
-        for(Point p : selectedStones){
-            System.out.println(p.r + " " + p.c);
-        }
+
         selectStones(cnt+1);
 
     }
