@@ -1,74 +1,63 @@
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine().trim());
-        
-        int[][] jobs = new int[n][3]; // [시작, 끝, 급여]
-        for (int i = 0; i < n; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            jobs[i][0] = Integer.parseInt(st.nextToken()); // 시작
-            jobs[i][1] = Integer.parseInt(st.nextToken()); // 끝
-            jobs[i][2] = Integer.parseInt(st.nextToken()); // 급여
+    // 알바 정보를 저장할 클래스
+    static class Job {
+        int start;
+        int end;
+        int profit;
+
+        public Job(int start, int end, int profit) {
+            this.start = start;
+            this.end = end;
+            this.profit = profit;
         }
-        
-        // 시작일 기준 정렬 (이미 정렬되어 있다고 했지만 안전하게)
-        Arrays.sort(jobs, (a, b) -> a[0] - b[0]);
-        
-        // dp[i] = i번째 알바까지 고려했을 때 최대 수익
-        long[] dp = new long[n];
-        
-        // 끝나는 시간 배열 (이분탐색용)
-        int[] endTimes = new int[n];
-        for (int i = 0; i < n; i++) {
-            endTimes[i] = jobs[i][1];
-        }
-        
-        dp[0] = jobs[0][2];
-        
-        for (int i = 1; i < n; i++) {
-            int startTime = jobs[i][0];
-            int profit = jobs[i][2];
-            
-            // i번째 알바를 하지 않는 경우
-            dp[i] = dp[i - 1];
-            
-            // i번째 알바를 하는 경우
-            // endTime < startTime 인 가장 마지막 알바 찾기
-            int prevIdx = findLastNonOverlapping(jobs, i, startTime);
-            
-            long include = profit;
-            if (prevIdx != -1) {
-                include += dp[prevIdx];
-            }
-            
-            dp[i] = Math.max(dp[i], include);
-        }
-        
-        System.out.println(dp[n - 1]);
     }
-    
-    // endTime < startTime 조건을 만족하는 가장 큰 인덱스 찾기
-    static int findLastNonOverlapping(int[][] jobs, int currentIdx, int startTime) {
-        int left = 0;
-        int right = currentIdx - 1;
-        int result = -1;
-        
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            
-            if (jobs[mid][1] < startTime) {
-                // 겹치지 않음 -> 더 오른쪽 탐색
-                result = mid;
-                left = mid + 1;
-            } else {
-                // 겹침 -> 더 왼쪽 탐색
-                right = mid - 1;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // 1. 입력 받기
+        int n = sc.nextInt();
+        Job[] jobs = new Job[n];
+
+        for (int i = 0; i < n; i++) {
+            int s = sc.nextInt();
+            int e = sc.nextInt();
+            int p = sc.nextInt();
+            jobs[i] = new Job(s, e, p);
+        }
+
+        // 2. DP 배열 초기화
+        // dp[i] = i번째 알바를 "마지막으로" 선택했을 때의 최대 이익
+        int[] dp = new int[n];
+
+        // 3. DP 수행
+        for (int i = 0; i < n; i++) {
+            // 기본적으로 i번째 알바 하나만 했을 때의 수익으로 초기화
+            dp[i] = jobs[i].profit;
+
+            // i번째 알바 이전에 있는 모든 j번째 알바들을 확인
+            for (int j = 0; j < i; j++) {
+                // j번째 알바가 끝나는 날짜가 i번째 알바 시작 날짜보다 작아야 함 (겹치지 않는 조건)
+                // 문제 조건: 끝난 날과 시작 날이 같아도 겹침 -> strictly less (<) 사용
+                if (jobs[j].end < jobs[i].start) {
+                    // j번째 알바를 하고 i번째 알바를 하는 것이 이득인지 확인하여 갱신
+                    if (dp[j] + jobs[i].profit > dp[i]) {
+                        dp[i] = dp[j] + jobs[i].profit;
+                    }
+                }
             }
         }
-        
-        return result;
+
+        // 4. 결과 출력 (dp 배열 중 최댓값)
+        int maxProfit = 0;
+        for (int i = 0; i < n; i++) {
+            if (dp[i] > maxProfit) {
+                maxProfit = dp[i];
+            }
+        }
+
+        System.out.println(maxProfit);
     }
 }
